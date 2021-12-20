@@ -19,11 +19,10 @@ def get_api_credentials():
     # USING DOTENV AND OS TO HIDE API INFORMATION
     dotenv_path = Path('.env')
     load_dotenv(dotenv_path=dotenv_path)
-    secret = os.getenv("secret")
-    client_id = os.getenv("client_id")
+
     return {
-        secret: secret,
-        client_id: client_id,
+        "secret": os.getenv("secret"),
+        "client_id": os.getenv("client_id"),
     }
 
 def get_top_100_songs_from_specific_day(date):
@@ -68,14 +67,16 @@ def get_list_of_urls(songs, sp):
     list_of_uris = []
     for key, value in songs.items():
         # SEARCHING FOR TRACK
-        results = sp.search(f"track: {key}", type="track")
-        items = results["tracks"]["items"]
-
         try:
+            results = sp.search(f"track: {key}", type="track")
+            items = results["tracks"]["items"]
+
+
             print(f"{key}, {value}, {items[0]['uri']}")
             list_of_uris.append(items[0]['uri'])
         except IndexError:
             print("Uri not found")
+    return list_of_uris
 
 def main():
     # ASKING FOR THE DATE WANTED
@@ -88,7 +89,7 @@ def main():
 
     # Get Spotify
     creds = get_api_credentials()
-    sp = get_spotify(creds.client_id, creds.secret)
+    sp = get_spotify(creds["client_id"], creds["secret"])
     user_id = sp.current_user()["id"]
 
     # CREATES NEW PLAYLIST WITH THE DATE AS TITLE
@@ -98,3 +99,5 @@ def main():
         playlist_id=playlist["id"],
         items=get_list_of_urls(songs, sp)
     )
+
+main()
