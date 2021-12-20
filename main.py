@@ -45,6 +45,8 @@ for song in song_container:
             artist = artist.strip()
 
     try:
+        # I FOUND THAT MY SEARCH BROUGHT BACK 2 DIGIT NUMBERS OR THE WORD NEW. SO CHECKED FOR THAT BEFORE ADDING IT AS
+        # AN ARTIST
         if len(artist) >= 3 and artist != "NEW":
             song_dict.update({title: artist})
     # CATCHING IF ARTIST WASN'T FOUND
