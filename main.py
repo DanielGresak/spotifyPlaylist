@@ -7,6 +7,7 @@ from dotenv import load_dotenv
 # import lxml
 from pathlib import Path
 
+
 def get_spotify(client_id, secret):
     SPOTIPY_REDIRECT_URI = "http://example.com"
     SCOPE = 'playlist-modify-private'
@@ -68,11 +69,11 @@ def get_list_of_urls(songs, sp):
     for key, value in songs.items():
         # SEARCHING FOR TRACK
         try:
-            results = sp.search(f"track: {key}", type="track")
+            results = sp.search(f"track: {key} artist:{value}", type="track")
             items = results["tracks"]["items"]
 
 
-            print(f"{key}, {value}, {items[0]['uri']}")
+            print(f"{items[0]['name']}, {items[0]['uri']}")
             list_of_uris.append(items[0]['uri'])
         except IndexError:
             print("Uri not found")
@@ -84,7 +85,9 @@ def main():
     
     url = get_top_100_songs_from_specific_day(date)
     http = get_http_request(url)
+
     soup = get_soup_container(http)
+
     songs = get_songs(soup)
 
     # Get Spotify
@@ -94,6 +97,7 @@ def main():
 
     # CREATES NEW PLAYLIST WITH THE DATE AS TITLE
     playlist = sp.user_playlist_create(user=user_id, name=date, public=False)
+
     # ADDS LIST OF SONGS TO PLAYLIST
     sp.playlist_add_items(
         playlist_id=playlist["id"],
