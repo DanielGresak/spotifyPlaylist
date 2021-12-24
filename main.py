@@ -88,7 +88,7 @@ def get_list_of_urls(songs, sp):
         except IndexError:
             not_found.append((key, value))
 
-    print(get_not_found(not_found, songs, spotify_dict ))
+    print(get_not_found(not_found, songs, spotify_dict))
     return list_of_uris
 
 
@@ -132,9 +132,6 @@ def main():
         playlist_id=playlist["id"],
         items=get_list_of_urls(songs, sp)
     )
-
-
-
 
 
 main()
