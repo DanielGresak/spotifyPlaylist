@@ -9,7 +9,7 @@ to figure out how to search more than one term (e.g. artist: variable, song: Oth
 me refactor the code into functions and also taught me some better practices. Sometimes the songs that are inserted aren't the correct ones. 
 I'm not sure if this will still be an issue once I can search more than one term.
 
-- [ ] Search more than one term
+- [x] Search more than one term
 - [ ] Incorrect songs being added
 
 ### Libraries and Apis used
