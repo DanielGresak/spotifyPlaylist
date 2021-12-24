@@ -16,3 +16,8 @@ I'm not sure if this will still be an issue once I can search more than one term
 
 For this I used BeautifulSoup to do the web scraping and Spotipy with the Spotify api to create and add to the playlist. 
 I also used libraries os, pathlib and dotenv to hide api authentication details.
+
+### Features added
+
+Added a function to let the user know which songs couldn't be found on spotify and which
+artists may not match
